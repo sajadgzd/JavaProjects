@@ -55,15 +55,15 @@ public class Painting {
     }
 
     public double getMinimumDiscountPrice(){
-            return price - (price * 0.15);
+        return price - (price * 0.15);
     }
 
     public double getMaximumDiscountPrice(){
-        return price - (price * 0.20);
+        return price - (price * 0.10);
     }
 
     public int getAge(){
-        return Calendar.YEAR - getYear();
+        return Calendar.getInstance().get(Calendar.YEAR) - getYear();
     }
 
 
