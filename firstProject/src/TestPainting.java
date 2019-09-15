@@ -15,13 +15,13 @@ public class TestPainting {
         painting1.setYear(1951);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter value for artistName?\t");
+        System.out.print("Enter value for artistName?  ");
         String artistName = scanner.nextLine();
-        System.out.print("Enter value for name?\t");
+        System.out.print("Enter value for name?  ");
         String name = scanner.nextLine();
-        System.out.print("Enter value for price?\t");
+        System.out.print("Enter value for price?  ");
         double price = scanner.nextDouble();
-        System.out.print("Enter value for year?\t");
+        System.out.print("Enter value for year?  ");
         int year = scanner.nextInt();
         scanner.close();
 
