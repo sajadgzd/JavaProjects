@@ -3,6 +3,4 @@ public class RaceSimulation {
     {
         return ("Race simulation class");
     }
-
-
 }

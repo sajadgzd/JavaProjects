@@ -7,6 +7,7 @@ public class Main {
     public static void nextRound(){
         System.out.printf("%s%n", "------------------------------------------------");
     }
+
     public static void main(String[] args) {
 
         System.out.printf("%s%n", "On Your Mark, Get Set, Go");
@@ -20,4 +21,5 @@ public class Main {
 
 
     }
+
 }
