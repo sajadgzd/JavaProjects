@@ -1,7 +1,8 @@
 
 // Sajad Gholamzadehrizi
+// sajadgzd@gmail.com
 
-// Importing Necessary Libraries
+// Importing necessary Libraries
 import java.security.SecureRandom;
 import java.util.Arrays;
 
@@ -14,11 +15,9 @@ public class Race {
     public static int R2;
     public static final SecureRandom randomNum = new SecureRandom();
 
-    // Track Method
-    public static void track(){
-
-
-        //Fills array with 100 characters
+    // run Method with each iteration
+    public static void run(){
+        //Filling the runway array with 100 empty string
         Arrays.fill(runway, " ");
 
         // If Racers are at lower than zero position, they will be set to zero.
@@ -42,8 +41,8 @@ public class Race {
         }
     }
 
-    // R1 Move Types method
-    public static void R1_movement(){
+    // R1 Move types method
+    public static void R1(){
 
         // generating random number between 1 to 10
         int rand = 1 + randomNum.nextInt(10);
@@ -71,10 +70,10 @@ public class Race {
         }
     }
 
-    // R2 Move Types method
-    public static void R2_movement(){
+    // R2 Move types method
+    public static void R2(){
 
-        // Makes sure the randomNum int generated is between 1-10
+        // generating a rand between 1 to 10
         int rand = 1 + randomNum.nextInt(10);
 
         switch(rand){
@@ -109,6 +108,11 @@ public class Race {
         }
     }
 
+
+    public String toString() {
+        return "Race simulation class";
+    }
+
     public static void main(String[] args) {
 
         // Initiates runway to start
@@ -119,17 +123,17 @@ public class Race {
         //initiates time to 0
         int time = 0;
 
-        // Iteration over the track runway, which runs over time
+        // Iteration over the run runway, which runs over time
         while(R1 < 100 && R2 < 100){
             System.out.printf("%nTime: %d%n", time);
 
-            track();
-            R1_movement();
-            R2_movement();
+            run();
+            R1();
+            R2();
 
             System.out.println();
 
-            // Runway squares
+            // Printing Runway squares
             for (int i = 1; i < 100; ++i){
                 char dash = '-';
                 System.out.printf("%s", dash);
@@ -138,16 +142,18 @@ public class Race {
             ++time;
 
         }
-        System.out.println();
 
-        // Results at the end of the race
+        // Printing the results at the end of the race
         if(R1 == R2) {
-            System.out.printf("%s%n", "IT's A TIE.");
+            System.out.printf("%n%s%n", "IT's A TIE.");
         } else if(R1 >= 100) {
-            System.out.printf("%s%n", "Runner 1 Wins.");
+            System.out.printf("%n%s%n", "Runner 1 Wins.");
         } else if(R2 >= 100){
-            System.out.printf("%s%n","Runner 2 Wins.");
+            System.out.printf("%n%s%n","Runner 2 Wins.");
         }
         System.out.printf("%s%d%s%n","Time Elapsed = ", time, " seconds");
+
+        Race word = new Race();
+        System.out.printf("%n%s%n%s%n", "THIS IS WHAT THE OVERLOADED 'toString()' Method RETURNS:", word.toString());
     }
 }
