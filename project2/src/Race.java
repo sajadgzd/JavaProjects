@@ -31,7 +31,7 @@ public class Race {
         // Racers are named R1 and R2
         runway[R1] = "R1";
         runway[R2] = "R2";
-        // If R1 and R2 are on the same square, as an example in the beginning of the race inserts B
+        // If R1 and R2 are on the same square, as an example in the beginning of the race insert B
         if(R1 == R2){
                 runway[R1] = "B";
         }
