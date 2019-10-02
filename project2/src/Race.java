@@ -13,7 +13,7 @@ public class Race {
     public static String runway[] = new String[100];
     public static int R1;
     public static int R2;
-    public static final SecureRandom randomNum = new SecureRandom();
+    public static SecureRandom randomNum = new SecureRandom();
 
     // run Method with each iteration
     public static void run(){
