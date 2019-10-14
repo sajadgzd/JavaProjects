@@ -8,6 +8,10 @@ public class NetworkLogManager {
         Id, TimeStamp, Source, Destination, Protocol, Length, Description;
     }
 
+    private ArrayList<LogEntry> commonMethod(String type){
+
+    }
+
     public boolean loadFile(String filename){
         Scanner input = new Scanner(filename);
         input.nextLine();
@@ -20,26 +24,26 @@ public class NetworkLogManager {
     public ArrayList<LogEntry> searchByRange(String fromDate, String toDate){
 //        return;
     }
-    public String searchById(String date){
-        return "";
+    public ArrayList<LogEntry> searchById(String date){
+//        return;
     }
-    public String searchByTimeStamp(String date){
-        return "";
+    public ArrayList<LogEntry> searchByTimeStamp(String date){
+//        return;
     }
-    public String searchBySource(String date){
-        return "";
+    public ArrayList<LogEntry> searchBySource(String date){
+//        return "";
     }
-    public String searchByDestination(String date){
-        return "";
+    public ArrayList<LogEntry> searchByDestination(String date){
+//        return "";
     }
-    public String searchByProtocol(String date){
-        return "";
+    public ArrayList<LogEntry> searchByProtocol(String date){
+//        return "";
     }
-    public String searchByLength(String date){
-        return "";
+    public ArrayList<LogEntry> searchByLength(String date){
+//        return "";
     }
-    public String searchByDescription(String date){
-        return "";
+    public ArrayList<LogEntry> searchByDescription(String date){
+//        return "";
     }
 
 }
