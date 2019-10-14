@@ -14,7 +14,8 @@ public class NetworkLogManager {
 
     public boolean loadFile(String filename){
         Scanner input = new Scanner(filename);
-        input.nextLine();
+        while (input.hasNextLine())
+            System.out.println(input.nextLine());
     }
 
     public String toString() {
