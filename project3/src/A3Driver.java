@@ -17,7 +17,7 @@ public class A3Driver {
 
         System.out.println(networkLogManager);
 
-        if (networkLogManager.loadFile("Network.log")) {
+        if (networkLogManager.loadFile("Network.log.txt")) {
 
             System.out.println(separator.toString());
 
