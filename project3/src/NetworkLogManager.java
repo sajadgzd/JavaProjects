@@ -1,3 +1,7 @@
+// Sajad Gholamzadehrizi
+
+
+// importing necessary libraries
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -8,6 +12,7 @@ import java.text.SimpleDateFormat;
 
 public class NetworkLogManager {
 
+    //private member variable
     private ArrayList<LogEntry> listLogEntries;
 
     //enum types to be used to specify which type of search is used
@@ -20,64 +25,80 @@ public class NetworkLogManager {
     }
     // common method for all searchBy methods
     private LogEntry searchBy(method type, String passedValue){
-        ArrayList<LogEntry> resultArrayList = new ArrayList<>();
+        LogEntry resultLog = null;
         switch (type) {
             case Id:
                 for(int i = 0; i < listLogEntries.size(); i++){
                     if(listLogEntries.get(i).getId().equals(passedValue)){
-                        resultArrayList.add(listLogEntries.get(i));
+                        resultLog = new LogEntry(listLogEntries.get(i).getId(), listLogEntries.get(i).getTimestamp(),
+                                listLogEntries.get(i).getSource(), listLogEntries.get(i).getDestination(),
+                                listLogEntries.get(i).getProtocol(), listLogEntries.get(i).getLength(),
+                                listLogEntries.get(i).getDescription());
                     }
                 }
                 break;
             case TimeStamp:
                 for(int i = 0; i < listLogEntries.size(); i++){
                     if(listLogEntries.get(i).getTimestamp().equals(passedValue)){
-                        resultArrayList.add(listLogEntries.get(i));
+                        resultLog = new LogEntry(listLogEntries.get(i).getId(), listLogEntries.get(i).getTimestamp(),
+                                listLogEntries.get(i).getSource(), listLogEntries.get(i).getDestination(),
+                                listLogEntries.get(i).getProtocol(), listLogEntries.get(i).getLength(),
+                                listLogEntries.get(i).getDescription());
                     }
                 }
                 break;
             case Source:
                 for(int i = 0; i < listLogEntries.size(); i++){
                     if(listLogEntries.get(i).getSource().equals(passedValue)){
-                        resultArrayList.add(listLogEntries.get(i));
+                        resultLog = new LogEntry(listLogEntries.get(i).getId(), listLogEntries.get(i).getTimestamp(),
+                                listLogEntries.get(i).getSource(), listLogEntries.get(i).getDestination(),
+                                listLogEntries.get(i).getProtocol(), listLogEntries.get(i).getLength(),
+                                listLogEntries.get(i).getDescription());
                     }
                 }
                 break;
             case Destination:
                 for(int i = 0; i < listLogEntries.size(); i++){
                     if(listLogEntries.get(i).getDestination().equals(passedValue)){
-                        resultArrayList.add(listLogEntries.get(i));
+                        resultLog = new LogEntry(listLogEntries.get(i).getId(), listLogEntries.get(i).getTimestamp(),
+                                listLogEntries.get(i).getSource(), listLogEntries.get(i).getDestination(),
+                                listLogEntries.get(i).getProtocol(), listLogEntries.get(i).getLength(),
+                                listLogEntries.get(i).getDescription());
                     }
                 }
                 break;
             case Protocol:
                 for(int i = 0; i < listLogEntries.size(); i++){
                     if(listLogEntries.get(i).getProtocol().equals(passedValue)){
-                        resultArrayList.add(listLogEntries.get(i));
+                        resultLog = new LogEntry(listLogEntries.get(i).getId(), listLogEntries.get(i).getTimestamp(),
+                                listLogEntries.get(i).getSource(), listLogEntries.get(i).getDestination(),
+                                listLogEntries.get(i).getProtocol(), listLogEntries.get(i).getLength(),
+                                listLogEntries.get(i).getDescription());
                     }
                 }
                 break;
             case Length:
                 for(int i = 0; i < listLogEntries.size(); i++){
                     if(listLogEntries.get(i).getLength().equals(passedValue)){
-                        resultArrayList.add(listLogEntries.get(i));
+                        resultLog = new LogEntry(listLogEntries.get(i).getId(), listLogEntries.get(i).getTimestamp(),
+                                listLogEntries.get(i).getSource(), listLogEntries.get(i).getDestination(),
+                                listLogEntries.get(i).getProtocol(), listLogEntries.get(i).getLength(),
+                                listLogEntries.get(i).getDescription());
                     }
                 }
                 break;
             case Description:
                 for(int i = 0; i < listLogEntries.size(); i++){
                     if(listLogEntries.get(i).getDescription().equals(passedValue)){
-                        resultArrayList.add(listLogEntries.get(i));
+                        resultLog = new LogEntry(listLogEntries.get(i).getId(), listLogEntries.get(i).getTimestamp(),
+                                listLogEntries.get(i).getSource(), listLogEntries.get(i).getDestination(),
+                                listLogEntries.get(i).getProtocol(), listLogEntries.get(i).getLength(),
+                                listLogEntries.get(i).getDescription());
                     }
                 }
                 break;
         }
-        if(resultArrayList.size() == 0){
-            return null;
-        }
-        else {
-            return resultArrayList.get(0);
-        }
+        return resultLog;
     }
 
     // method to load the file with entries
@@ -99,11 +120,13 @@ public class NetworkLogManager {
         return Boolean.TRUE;
     }
 
+    //overriding toString method
     @Override
     public String toString() {
         return "NetworkLogManager: there are " + listLogEntries.size() + " records";
     }
 
+    // method to search by date range
     public ArrayList<LogEntry> searchByRange(String fromDate, String toDate) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyy HH:mm:ss");
         Date from = dateFormat.parse(fromDate);
@@ -119,6 +142,7 @@ public class NetworkLogManager {
         return result;
     }
 
+    // below are 7 remaining methods by certain filters
     public LogEntry searchById(String id){
         return searchBy(method.Id, id);
     }
