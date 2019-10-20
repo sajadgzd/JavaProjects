@@ -19,60 +19,65 @@ public class NetworkLogManager {
         this.listLogEntries = new ArrayList<LogEntry>();
     }
     // common method for all searchBy methods
-    private ArrayList<LogEntry> searchBy(method type, String passedValue){
+    private LogEntry searchBy(method type, String passedValue){
         ArrayList<LogEntry> resultArrayList = new ArrayList<>();
         switch (type) {
             case Id:
                 for(int i = 0; i < listLogEntries.size(); i++){
-                    if(listLogEntries.get(i).getId() == passedValue){
+                    if(listLogEntries.get(i).getId().equals(passedValue)){
                         resultArrayList.add(listLogEntries.get(i));
                     }
                 }
                 break;
             case TimeStamp:
                 for(int i = 0; i < listLogEntries.size(); i++){
-                    if(listLogEntries.get(i).getTimestamp() == passedValue){
+                    if(listLogEntries.get(i).getTimestamp().equals(passedValue)){
                         resultArrayList.add(listLogEntries.get(i));
                     }
                 }
                 break;
             case Source:
                 for(int i = 0; i < listLogEntries.size(); i++){
-                    if(listLogEntries.get(i).getSource() == passedValue){
+                    if(listLogEntries.get(i).getSource().equals(passedValue)){
                         resultArrayList.add(listLogEntries.get(i));
                     }
                 }
                 break;
             case Destination:
                 for(int i = 0; i < listLogEntries.size(); i++){
-                    if(listLogEntries.get(i).getDestination() == passedValue){
+                    if(listLogEntries.get(i).getDestination().equals(passedValue)){
                         resultArrayList.add(listLogEntries.get(i));
                     }
                 }
                 break;
             case Protocol:
                 for(int i = 0; i < listLogEntries.size(); i++){
-                    if(listLogEntries.get(i).getProtocol() == passedValue){
+                    if(listLogEntries.get(i).getProtocol().equals(passedValue)){
                         resultArrayList.add(listLogEntries.get(i));
                     }
                 }
                 break;
             case Length:
                 for(int i = 0; i < listLogEntries.size(); i++){
-                    if(listLogEntries.get(i).getLength() == passedValue){
+                    if(listLogEntries.get(i).getLength().equals(passedValue)){
                         resultArrayList.add(listLogEntries.get(i));
                     }
                 }
                 break;
             case Description:
                 for(int i = 0; i < listLogEntries.size(); i++){
-                    if(listLogEntries.get(i).getDescription() == passedValue){
+                    if(listLogEntries.get(i).getDescription().equals(passedValue)){
                         resultArrayList.add(listLogEntries.get(i));
                     }
                 }
                 break;
         }
-        return resultArrayList;
+        if(resultArrayList.size() == 0){
+            return null;
+        }
+        else {
+            return resultArrayList.get(0);
+        }
     }
 
     // method to load the file with entries
@@ -114,25 +119,25 @@ public class NetworkLogManager {
         return result;
     }
 
-    public ArrayList<LogEntry> searchById(String id){
+    public LogEntry searchById(String id){
         return searchBy(method.Id, id);
     }
-    public ArrayList<LogEntry> searchByTimeStamp(String date){
+    public LogEntry searchByTimeStamp(String date){
         return searchBy(method.TimeStamp, date);
     }
-    public ArrayList<LogEntry> searchBySource(String source){
+    public LogEntry searchBySource(String source){
         return searchBy(method.Source, source);
     }
-    public ArrayList<LogEntry> searchByDestination(String destination){
+    public LogEntry searchByDestination(String destination){
         return searchBy(method.Destination, destination);
     }
-    public ArrayList<LogEntry> searchByProtocol(String protocol){
+    public LogEntry searchByProtocol(String protocol){
         return searchBy(method.Protocol, protocol);
     }
-    public ArrayList<LogEntry> searchByLength(String length){
+    public LogEntry searchByLength(String length){
         return searchBy(method.Length, length);
     }
-    public ArrayList<LogEntry> searchByDescription(String description){
+    public LogEntry searchByDescription(String description){
         return searchBy(method.Description, description);
     }
 

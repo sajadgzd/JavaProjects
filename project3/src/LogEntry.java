@@ -15,9 +15,6 @@ public class LogEntry {
                 length == null || length.equals("0") || description.isEmpty() || description == null){
             throw new IllegalArgumentException();
         }
-//        if(){
-//            throw new IllegalArgumentException();
-//        }
         this.id = id;
         this.timestamp = timestamp;
         this.source = source;
