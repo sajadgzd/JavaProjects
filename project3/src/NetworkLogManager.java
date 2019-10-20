@@ -10,15 +10,15 @@ public class NetworkLogManager {
 
     private ArrayList<LogEntry> listLogEntries;
 
+    //enum types to be used to specify which type of search is used
     enum method{
         Id, TimeStamp, Source, Destination, Protocol, Length, Description;
     }
-
+    // default constructor
     public NetworkLogManager(){
         this.listLogEntries = new ArrayList<LogEntry>();
     }
-
-
+    // common method for all searchBy methods
     private ArrayList<LogEntry> searchBy(method type, String passedValue){
         ArrayList<LogEntry> resultArrayList = new ArrayList<>();
         switch (type) {
@@ -75,26 +75,26 @@ public class NetworkLogManager {
         return resultArrayList;
     }
 
-    public Boolean loadFile(String filename){
-        try {
-            Scanner scanner = new Scanner(new File(filename));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String arr[] = line.split(",");
-//                System.out.println(line);
+    // method to load the file with entries
+    public Boolean loadFile(String filename) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(filename));
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            String arr[] = line.split(",");
+            try {
                 LogEntry logEntry = new LogEntry(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
                 listLogEntries.add(logEntry);
+            } catch (IllegalArgumentException e) {
+                System.out.printf("Skipping line: %s%n", line);
             }
+        }
+        if(scanner != null){
             scanner.close();
-            return Boolean.TRUE;
         }
-        catch (FileNotFoundException e){
-//            throw new FileNotFoundException;
-            return Boolean.FALSE;
-        }
-
+        return Boolean.TRUE;
     }
 
+    @Override
     public String toString() {
         return "NetworkLogManager: there are " + listLogEntries.size() + " records";
     }
@@ -121,19 +121,19 @@ public class NetworkLogManager {
         return searchBy(method.TimeStamp, date);
     }
     public ArrayList<LogEntry> searchBySource(String source){
-        return searchBy(method.Id, source);
+        return searchBy(method.Source, source);
     }
     public ArrayList<LogEntry> searchByDestination(String destination){
-        return searchBy(method.Id, destination);
+        return searchBy(method.Destination, destination);
     }
     public ArrayList<LogEntry> searchByProtocol(String protocol){
-        return searchBy(method.Id, protocol);
+        return searchBy(method.Protocol, protocol);
     }
     public ArrayList<LogEntry> searchByLength(String length){
-        return searchBy(method.Id, length);
+        return searchBy(method.Length, length);
     }
     public ArrayList<LogEntry> searchByDescription(String description){
-        return searchBy(method.Id, description);
+        return searchBy(method.Description, description);
     }
 
 }

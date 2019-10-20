@@ -9,14 +9,15 @@ public class LogEntry {
 
     public LogEntry(String id, String timestamp, String source, String destination, String protocol,
                      String length, String description){
-        if(!id.matches("[0-9]+")){
+        if( !id.matches("[0-9]+") || timestamp.isEmpty() || timestamp == null ||
+                source.isEmpty() || source == null || destination.isEmpty() ||
+                destination == null || protocol.isEmpty() || protocol == null || length.isEmpty() ||
+                length == null || length.equals("0") || description.isEmpty() || description == null){
             throw new IllegalArgumentException();
         }
-        if(timestamp.isEmpty() || timestamp == null || source.isEmpty() || source == null || destination.isEmpty() ||
-            destination == null || protocol.isEmpty() || protocol == null || length.isEmpty() || length == null ||
-            description.isEmpty() || description == null){
-            throw new IllegalArgumentException();
-        }
+//        if(){
+//            throw new IllegalArgumentException();
+//        }
         this.id = id;
         this.timestamp = timestamp;
         this.source = source;
@@ -29,7 +30,7 @@ public class LogEntry {
 
 
 
-
+    @Override
     public String toString() {
         return  id + "," + timestamp + "," + source + "," + destination + "," + protocol + "," +
                  length + "," + description;
