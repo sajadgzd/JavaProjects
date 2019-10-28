@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class ShapeList {
@@ -39,11 +40,28 @@ public class ShapeList {
     }
 
     public void printFormatted(){
-        for (Shape element : setShapes) {
-            System.out.println(element);
+        StringBuilder sb = new StringBuilder(110);
+        sb.append("+");
+        for(int n = 0; n < 80; ++n)
+            sb.append('-');
+        sb.append("+");
+
+        sb.append(System.lineSeparator());
+        System.out.print(sb.toString());
+        System.out.println("| ID   | Name    | Color   | Dimensions          | Description       |");
+        System.out.print(sb.toString());
+
+        Iterator value = setShapes.iterator();
+        while (value.hasNext()) {
+            for(int i = 0; i< 5; i++){
+                System.out.printf("%s%n",value.next());
+                System.out.print(sb.toString());
+            }
+
         }
-//        System.out.println(setShapes);
+
     }
+//        System.out.println(setShapes);
 
     public int getSize(){
         return setShapes.size();

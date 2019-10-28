@@ -26,7 +26,7 @@ public abstract class Shape2D extends Shape{
 
     @Override
     public String toString(){
-        return super.toString() + getDimentions() + " | " + getDescription();
+        return super.toString() + getDimentions() + "      | " + getDescription() + "       |";
     }
 
 }

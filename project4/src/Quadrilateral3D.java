@@ -15,7 +15,7 @@ public class Quadrilateral3D extends Shape3D{
 
     @Override
     public int compareTo(Shape shape3d) {
-        if (this.getName() == shape3d.getName()){
+        if (this.getName() == shape3d.getName() && this.getId() == shape3d.getId()){
             return 0;
         } else {
             return -1;

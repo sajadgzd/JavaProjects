@@ -15,7 +15,7 @@ public class Quadrilateral extends Shape2D {
 
     @Override
     public int compareTo(Shape shape2d) {
-        if (this.getName() == shape2d.getName()){
+        if (this.getName() == shape2d.getName() && this.getId() == shape2d.getId()){
             return 0;
         } else {
             return -1;

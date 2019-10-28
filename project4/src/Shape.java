@@ -1,5 +1,4 @@
 
-import java.util.Comparator;
 import java.awt.Color;
 
 public abstract class Shape implements Comparable<Shape> {
@@ -21,7 +20,7 @@ public abstract class Shape implements Comparable<Shape> {
 
     @Override
     public String toString(){
-        return id + " | " + name + " | " + getColor() + " | ";
+        return "| " + id + " | " + name + "   | " + getColor() + "  | ";
     }
 
     public int getId(){
@@ -30,8 +29,20 @@ public abstract class Shape implements Comparable<Shape> {
     public String getName(){
         return name;
     }
-    public Color getColor(){
-        return color;
+    public String getColor(){
+        String colorName = "";
+        if(color.getRed() == 0 && color.getGreen() == 0 && color.getBlue() == 0){
+            colorName = "Black";
+        } else if(color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 255){
+            colorName = "White";
+        } else if (color.getRed() == 255 && color.getGreen() == 0 && color.getBlue() == 0) {
+            colorName = "Red";
+        } else if (color.getBlue() == 255 && color.getGreen() == 0 && color.getRed() == 0) {
+            colorName = "Blue";
+        } else if (color.getGreen() == 255 && color.getRed() == 0 && color.getBlue() == 0) {
+            colorName = "Green";
+        }
+        return colorName;
     }
     public String getDescription(){
         return description;
