@@ -11,7 +11,7 @@ public abstract class Shape2D extends Shape{
         this.width = width;
     }
 
-    public String getDimentions(){
+    public String getDimensions(){
         return "$" + height + ":" + width;
     }
 
@@ -26,7 +26,7 @@ public abstract class Shape2D extends Shape{
 
     @Override
     public String toString(){
-        return super.toString() + getDimentions() + "      | " + getDescription() + "       |";
+        return super.toString() + getDimensions() + "      | " + getDescription() + "       |";
     }
 
 }

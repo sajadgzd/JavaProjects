@@ -11,7 +11,6 @@ public class ShapeList {
 
     public boolean add(Shape shape) throws Exception {
         if (setShapes.contains(shape)){
-            System.err.println("Duplicate object");
             throw new Exception();
         } else {
             setShapes.add(shape);
@@ -53,15 +52,11 @@ public class ShapeList {
 
         Iterator value = setShapes.iterator();
         while (value.hasNext()) {
-            for(int i = 0; i< 5; i++){
                 System.out.printf("%s%n",value.next());
                 System.out.print(sb.toString());
-            }
-
         }
 
     }
-//        System.out.println(setShapes);
 
     public int getSize(){
         return setShapes.size();
