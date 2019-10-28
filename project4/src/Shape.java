@@ -21,7 +21,7 @@ public abstract class Shape implements Comparable<Shape> {
 
     @Override
     public String toString(){
-        return id + " " + name + " " + description + " " + color;
+        return id + " | " + name + " | " + getColor() + " | ";
     }
 
     public int getId(){
@@ -33,5 +33,7 @@ public abstract class Shape implements Comparable<Shape> {
     public Color getColor(){
         return color;
     }
-
+    public String getDescription(){
+        return description;
+    }
 }

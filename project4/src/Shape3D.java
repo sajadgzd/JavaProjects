@@ -12,7 +12,7 @@ public abstract class Shape3D extends Shape2D {
 
     @Override
     public String getDimentions(){
-        return super.getDimentions() + "length:\t" + length;
+        return super.getDimentions() + ":" + length;
     }
 
     public int compareTo(Shape3D shape3d){
@@ -26,7 +26,7 @@ public abstract class Shape3D extends Shape2D {
 
     @Override
     public String toString(){
-        return super.toString() + " " + length;
+        return super.toString() + ":" + length + " | " + getDescription();
     }
 
 

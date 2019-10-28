@@ -12,7 +12,7 @@ public abstract class Shape2D extends Shape{
     }
 
     public String getDimentions(){
-        return "height:\t" + height + "width:\t" + width;
+        return "$" + height + ":" + width;
     }
 
     public int compareTo(Shape2D shape2d){
@@ -26,7 +26,7 @@ public abstract class Shape2D extends Shape{
 
     @Override
     public String toString(){
-        return super.toString() + " " +  height + " " + width;
+        return super.toString() + getDimentions() + " | " + getDescription();
     }
 
 }
