@@ -11,7 +11,6 @@ public class ShapeList {
 
     public boolean add(Shape shape) throws Exception {
         if (setShapes.contains(shape)){
-            System.out.println(get3DShapes());
             throw new Exception();
         } else {
             setShapes.add(shape);
@@ -52,18 +51,8 @@ public class ShapeList {
         System.out.print(sb);
 
         for (Shape element : setShapes) {
-//            sb4 += element + "\n";
-//            sb4 += sb;
-//            System.out.println(sb3);
-//            System.out.print(sb);
-
-//            if(element instanceof Shape2D){
-//            if(element instanceof Shape3D) {
             System.out.printf("%5s%n", element);
             System.out.print(sb);
-//            }
-//            System.out.println(get3DShapes());
-//            }
         }
 
 //        Iterator value = setShapes.iterator();
@@ -75,8 +64,6 @@ public class ShapeList {
 //        System.out.println(sb2);
 
 //        String sb4 = "";
-
-
 
 //        System.out.println(sb4);
 
@@ -109,19 +96,6 @@ public class ShapeList {
 //            System.out.print(sb.toString());
 //        }
 
-
-//        while (value.hasNext()) {
-//            String line = setShapes.toString();
-////            String lineParts = value.next();
-//            System.out.printf("%10s%n",value.next());
-//            System.out.print(sb.toString());
-//        }
-
-//        for (int i = 0 ; i <setShapes.size(); i++){
-//            String[] array2 =  setShapes.toArray()[i].toString().split("|");
-//            System.out.println(setShapes.toArray()[i].toString());
-//            System.out.print(sb.toString());
-//        }
 //        String all = setShapes.toString();
 //        String[] splitted = all.split("|");
 ////        String[] newthing = splitted.split("|");
@@ -129,11 +103,7 @@ public class ShapeList {
 //            System.out.print(toString(splitted[i].split("|")));
 //
 //        }
-
-
-
     }
-
 
     public int getSize(){
         return setShapes.size();

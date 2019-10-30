@@ -29,18 +29,6 @@ public abstract class Shape3D extends Shape2D {
         }
     }
 
-//    public double getLength() {
-//        return length;
-//    }
-//
-//    public double getWidth(){
-//        return width;
-//    }
-//
-//    public double getHeight(){
-//        return height;
-//    }
-
     @Override
     public String toString(){
         return "| " + getId() + " | " + getName() + "  | " + getColor() + "   | " + getDimensions() + "      | " + getDescription()
