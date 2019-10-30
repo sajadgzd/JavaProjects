@@ -19,7 +19,8 @@ public abstract class Shape3D extends Shape2D {
 //        System.out.println("HEY for 3D:" + this.length * this.width * this.height + "  is equal to " + shape3d.area());
 //        System.out.println("HEY for 3D:" + this.getName() + " is equal to: " + shape3d.getName());
         if ((this.getName()).equals(shape3d.getName()) && (this.width * this.height) == shape3d.area()
-            && (2 * (width * height + width * length + length * height)) == shape3d.perimeter()) {
+            && (2 * (width * height + width * length + length * height)) == shape3d.perimeter()
+            && this.height == shape3d.getHeight() && this.width == shape3d.getWidth() && this.length == shape3d.getLength()) {
                 return 0;
             } else {
                 return -1;
@@ -28,6 +29,14 @@ public abstract class Shape3D extends Shape2D {
 
     public double getLength() {
         return length;
+    }
+
+    public double getWidth(){
+        return width;
+    }
+
+    public double getHeight(){
+        return height;
     }
 
     @Override

@@ -11,14 +11,6 @@ public abstract class Shape2D extends Shape{
         this.width = width;
     }
 
-    public double getHeight() {
-        return height;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
     public String getDimensions(){
         return "$" + height + ":" + width;
     }
@@ -27,12 +19,14 @@ public abstract class Shape2D extends Shape{
 //        System.out.println("HEY:" + this.getHeight()  * this.getWidth() + "   //is equal to " + shape2d.area() );
 //        System.out.println("HEY:" + this.getName() + " is equal to: " + shape2d.getName());
         if ((this.getName()).equals(shape2d.getName()) && (this.height  * this.width) == shape2d.area() &&
-                (2 * (width + height)) == shape2d.perimeter()) {
+                (2 * (width + height)) == shape2d.perimeter()
+            && this.height == shape2d.getHeight() && this.width == this.getWidth()) {
                 return 0;
             } else {
                 return -1;
         }
     }
+
 
     @Override
     public String toString(){
