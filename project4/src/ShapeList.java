@@ -11,7 +11,7 @@ public class ShapeList {
 
     public boolean add(Shape shape) throws Exception {
         if (setShapes.contains(shape)){
-            System.out.println(get2DShapes());
+            System.out.println(get3DShapes());
             throw new Exception();
         } else {
             setShapes.add(shape);

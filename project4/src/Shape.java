@@ -22,6 +22,8 @@ public abstract class Shape implements Comparable<Shape> {
     public abstract double getWidth();
     public abstract double getLength();
 
+    public abstract String getDimensions();
+
     @Override
     public String toString(){
         return "| " + id + " | " + name + "   | " + getColor() + "  | ";

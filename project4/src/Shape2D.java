@@ -18,9 +18,11 @@ public abstract class Shape2D extends Shape{
     public int compareTo(Shape shape2d){
 //        System.out.println("HEY:" + this.getHeight()  * this.getWidth() + "   //is equal to " + shape2d.area() );
 //        System.out.println("HEY:" + this.getName() + " is equal to: " + shape2d.getName());
-        if ((this.getName()).equals(shape2d.getName()) && (this.height  * this.width) == shape2d.area() &&
-                (2 * (width + height)) == shape2d.perimeter()
-            && this.height == shape2d.getHeight() && this.width == this.getWidth()) {
+        if ((this.getName()).equals(shape2d.getName())
+//                && (this.height  * this.width) == shape2d.area() &&
+//                (2 * (width + height)) == shape2d.perimeter()
+//            && this.height == shape2d.getHeight() && this.width == this.getWidth()
+            && this.getDimensions().equals(shape2d.getDimensions())) {
                 return 0;
             } else {
                 return -1;

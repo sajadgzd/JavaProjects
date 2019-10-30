@@ -18,26 +18,28 @@ public abstract class Shape3D extends Shape2D {
     public int compareTo(Shape shape3d){
 //        System.out.println("HEY for 3D:" + this.length * this.width * this.height + "  is equal to " + shape3d.area());
 //        System.out.println("HEY for 3D:" + this.getName() + " is equal to: " + shape3d.getName());
-        if ((this.getName()).equals(shape3d.getName()) && (this.width * this.height) == shape3d.area()
-            && (2 * (width * height + width * length + length * height)) == shape3d.perimeter()
-            && this.height == shape3d.getHeight() && this.width == shape3d.getWidth() && this.length == shape3d.getLength()) {
+        if ((this.getName()).equals(shape3d.getName())
+//                && (this.width * this.height) == shape3d.area()
+//            && (2 * (width * height + width * length + length * height)) == shape3d.perimeter()
+//            && this.height == shape3d.getHeight() && this.width == shape3d.getWidth() && this.length == shape3d.getLength()
+                && this.getDimensions().equals(shape3d.getDimensions())) {
                 return 0;
             } else {
                 return -1;
         }
     }
 
-    public double getLength() {
-        return length;
-    }
-
-    public double getWidth(){
-        return width;
-    }
-
-    public double getHeight(){
-        return height;
-    }
+//    public double getLength() {
+//        return length;
+//    }
+//
+//    public double getWidth(){
+//        return width;
+//    }
+//
+//    public double getHeight(){
+//        return height;
+//    }
 
     @Override
     public String toString(){
