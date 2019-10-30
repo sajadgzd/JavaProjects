@@ -18,9 +18,9 @@ public abstract class Shape implements Comparable<Shape> {
     public abstract double area();
     public abstract double perimeter();
 
-    public abstract double getHeight();
-    public abstract double getWidth();
-    public abstract double getLength();
+//    public abstract double getHeight();
+//    public abstract double getWidth();
+//    public abstract double getLength();
 
     public abstract String getDimensions();
 

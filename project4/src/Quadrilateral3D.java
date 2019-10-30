@@ -13,16 +13,16 @@ public class Quadrilateral3D extends Shape3D{
         return 2 * (width * height + width * length + length * height);
     }
 
-    public double getLength() {
-        return length;
-    }
-
-    public double getWidth(){
-        return width;
-    }
-    public double getHeight(){
-        return height;
-    }
+//    public double getLength() {
+//        return length;
+//    }
+//
+//    public double getWidth(){
+//        return width;
+//    }
+//    public double getHeight(){
+//        return height;
+//    }
 
 }
 

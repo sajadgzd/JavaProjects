@@ -14,16 +14,16 @@ public class Quadrilateral extends Shape2D {
     }
 
 
-    public double getWidth(){
-        return width;
-    }
-    public double getHeight(){
-        return height;
-    }
-
-    public double getLength(){
-        return 0;
-    }
+//    public double getWidth(){
+//        return width;
+//    }
+//    public double getHeight(){
+//        return height;
+//    }
+//
+//    public double getLength(){
+//        return 0;
+//    }
 
 
 
