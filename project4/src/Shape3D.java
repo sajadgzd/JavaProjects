@@ -15,9 +15,9 @@ public abstract class Shape3D extends Shape2D {
         return super.getDimensions() + ":" + length;
     }
 
-    public int compareTo(Shape3D shape3d){
-        if (this.getName() == shape3d.getName() && this.height == shape3d.height
-                && this.width == shape3d.width && this.length == shape3d.length){
+    public int compareTo(Shape shape3d){
+        if (this.getName() == shape3d.getName() && this.height == height
+                && this.width == width && this.length == length){
             return 0;
         } else {
             return -1;

@@ -46,9 +46,9 @@ public class ShapeList {
         sb.append("+");
 
         sb.append(System.lineSeparator());
-        System.out.print(sb.toString());
+        System.out.print(sb);
         System.out.println("| ID   | Name    | Color   | Dimensions          | Description       |");
-        System.out.print(sb.toString());
+        System.out.print(sb);
 
         Iterator value = setShapes.iterator();
 
@@ -60,15 +60,20 @@ public class ShapeList {
 
         String sb4 = "";
 
-//        for (Shape element : setShapes) {
+        for (Shape element : setShapes) {
 //            sb4 += element + "\n";
 //            sb4 += sb;
 //            System.out.println(sb3);
 //            System.out.print(sb);
 
-            System.out.printf("%5s%n", get2DShapes());
+//            if(element instanceof Shape2D){
+            if(element instanceof  Shape2D) {
+                System.out.printf("%5s%n", element);
+                System.out.print(sb);
+            }
 
-//        }
+//            }
+        }
 
 //        System.out.println(sb4);
 

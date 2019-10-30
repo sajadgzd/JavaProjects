@@ -13,15 +13,6 @@ public class Quadrilateral3D extends Shape3D{
         return 2 * (width * height + width * length + length * height);
     }
 
-    @Override
-    public int compareTo(Shape shape3d) {
-        if (this.getId() == shape3d.getId() && this.getColor().equals(shape3d.getColor()) && this.getName().equals(shape3d.getName())
-        && this.getDescription().equals(shape3d.getDescription())){
-            return 0;
-        } else {
-            return -1;
-        }
-    }
 }
 
 

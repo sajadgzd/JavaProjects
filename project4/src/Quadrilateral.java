@@ -13,13 +13,4 @@ public class Quadrilateral extends Shape2D {
         return 2 * (width + height);
     }
 
-    @Override
-    public int compareTo(Shape shape2d) {
-        if (this.getId() == shape2d.getId() && this.getColor().equals(shape2d.getColor()) && this.getName().equals(shape2d.getName())
-                && this.getDescription().equals(shape2d.getDescription()) && this.width == width){
-            return 0;
-        } else {
-            return -1;
-        }
-    }
 }

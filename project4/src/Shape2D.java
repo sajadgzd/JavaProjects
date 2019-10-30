@@ -15,9 +15,9 @@ public abstract class Shape2D extends Shape{
         return "$" + height + ":" + width;
     }
 
-    public int compareTo(Shape2D shape2d){
-        if (this.getName() == shape2d.getName() && this.height == shape2d.height
-            && this.width == shape2d.width){
+    public int compareTo(Shape shape2d){
+        if (this.getName() == getName() && this.height == height
+            && this.width == width){
             return 0;
         } else {
             return -1;
