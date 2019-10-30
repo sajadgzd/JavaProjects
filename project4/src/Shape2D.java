@@ -11,16 +11,26 @@ public abstract class Shape2D extends Shape{
         this.width = width;
     }
 
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
     public String getDimensions(){
         return "$" + height + ":" + width;
     }
 
     public int compareTo(Shape shape2d){
-        if (this.getName() == getName() && this.height == height
-            && this.width == width){
-            return 0;
-        } else {
-            return -1;
+//        System.out.println("HEY:" + this.getHeight()  * this.getWidth() + "   //is equal to " + shape2d.area() );
+//        System.out.println("HEY:" + this.getName() + " is equal to: " + shape2d.getName());
+        if ((this.getName()).equals(shape2d.getName()) && (this.height  * this.width) == shape2d.area() &&
+                (2 * (width + height)) == shape2d.perimeter()) {
+                return 0;
+            } else {
+                return -1;
         }
     }
 

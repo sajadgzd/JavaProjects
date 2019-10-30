@@ -11,6 +11,7 @@ public class ShapeList {
 
     public boolean add(Shape shape) throws Exception {
         if (setShapes.contains(shape)){
+            System.out.println(get2DShapes());
             throw new Exception();
         } else {
             setShapes.add(shape);
@@ -20,9 +21,9 @@ public class ShapeList {
 
     public TreeSet<Shape2D> get2DShapes(){
         TreeSet<Shape2D> new2DSet = new TreeSet<>();
-        for(Shape ref: setShapes){
-            if(ref instanceof Shape2D){
-                new2DSet.add((Shape2D) ref);
+        for(Shape ref2: setShapes){
+            if(ref2 instanceof Shape2D){
+                new2DSet.add((Shape2D) ref2);
             }
         }
         return new2DSet;
@@ -30,9 +31,9 @@ public class ShapeList {
 
     public TreeSet<Shape3D> get3DShapes(){
         TreeSet<Shape3D> new3DSet = new TreeSet<>();
-        for(Shape ref: setShapes){
-            if(ref instanceof Shape3D){
-                new3DSet.add((Shape3D) ref);
+        for(Shape ref3: setShapes){
+            if(ref3 instanceof Shape3D){
+                new3DSet.add((Shape3D) ref3);
             }
         }
         return new3DSet;
@@ -50,16 +51,6 @@ public class ShapeList {
         System.out.println("| ID   | Name    | Color   | Dimensions          | Description       |");
         System.out.print(sb);
 
-        Iterator value = setShapes.iterator();
-
-        StringBuilder sb2 = new StringBuilder(110);
-        StringBuffer sb3 = new StringBuffer();
-
-        sb2.append(setShapes);
-//        System.out.println(sb2);
-
-        String sb4 = "";
-
         for (Shape element : setShapes) {
 //            sb4 += element + "\n";
 //            sb4 += sb;
@@ -67,13 +58,25 @@ public class ShapeList {
 //            System.out.print(sb);
 
 //            if(element instanceof Shape2D){
-            if(element instanceof  Shape2D) {
-                System.out.printf("%5s%n", element);
-                System.out.print(sb);
-            }
-
+//            if(element instanceof Shape3D) {
+            System.out.printf("%5s%n", element);
+            System.out.print(sb);
+//            }
+//            System.out.println(get3DShapes());
 //            }
         }
+
+//        Iterator value = setShapes.iterator();
+
+//        StringBuilder sb2 = new StringBuilder(110);
+//        StringBuffer sb3 = new StringBuffer();
+//
+//        sb2.append(setShapes);
+//        System.out.println(sb2);
+
+//        String sb4 = "";
+
+
 
 //        System.out.println(sb4);
 
