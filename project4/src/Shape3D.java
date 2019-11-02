@@ -22,7 +22,8 @@ public abstract class Shape3D extends Shape2D {
 //                && (this.width * this.height) == shape3d.area()
 //            && (2 * (width * height + width * length + length * height)) == shape3d.perimeter()
 //            && this.height == shape3d.getHeight() && this.width == shape3d.getWidth() && this.length == shape3d.getLength()
-                && this.getDimensions().equals(shape3d.getDimensions())) {
+                && this.getDimensions().equals(shape3d.getDimensions())
+        ) {
                 return 0;
             } else {
                 return -1;

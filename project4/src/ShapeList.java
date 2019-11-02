@@ -3,28 +3,34 @@ import java.util.TreeSet;
 
 public class ShapeList {
 
+    TreeSet<Shape> setShapes;
     TreeSet<Shape2D> setShapes2D;
     TreeSet<Shape3D> setShapes3D;
 
-//    TreeSet<Shape> setShapes;
-
     public ShapeList(){
+        this.setShapes = new TreeSet<>();
         this.setShapes2D = new TreeSet<>();
         this.setShapes3D = new TreeSet<>();
     }
     public boolean add(Shape shape) throws Exception {
-        if (setShapes2D.contains(shape) || setShapes3D.contains(shape)){
-            throw new Exception();
-        } else {
-            if(shape instanceof Shape3D){
+        if(shape instanceof Shape3D){
+            if (setShapes.contains(shape)){
+                throw new Exception();
+            } else {
+                setShapes.add(shape);
                 setShapes3D.add((Shape3D) shape);
+                return true;
             }
-            else {
+        } else {
+            if (setShapes.contains(shape)){
+                throw new Exception();
+            } else {
+                setShapes.add(shape);
                 setShapes2D.add((Shape2D) shape);
+                return true;
             }
-
-            return true;
         }
+
     }
 
     public TreeSet<Shape2D> get2DShapes(){
@@ -46,30 +52,15 @@ public class ShapeList {
         System.out.println("| ID   | Name    | Color   | Dimensions          | Description       |");
         System.out.print(sb);
 
-        for (Shape3D element : setShapes3D) {
-            System.out.printf("%5s%n", element);
+
+        for (Shape element: setShapes){
+            System.out.println(element);
             System.out.print(sb);
         }
-        for (Shape2D element : setShapes2D) {
-            System.out.printf("%5s%n", element);
-            System.out.print(sb);
-        }
-//        TreeSet<Shape> setShapes = new TreeSet<>();
-//
-//        for(Shape2D element : setShapes2D){
-//            setShapes.add(element);
-//        }
-//        for (Shape3D element: setShapes3D){
-//            setShapes.add(element);
-//        }
-//        for (Shape element: setShapes){
-//            System.out.println(element);
-//            System.out.print(sb);
-//        }
 
     }
 
     public int getSize(){
-        return setShapes2D.size() + setShapes3D.size();
+        return setShapes.size();
     }
 }
