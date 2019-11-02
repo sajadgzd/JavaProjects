@@ -3,39 +3,35 @@ import java.util.TreeSet;
 
 public class ShapeList {
 
-    TreeSet<Shape> setShapes;
+    TreeSet<Shape2D> setShapes2D;
+    TreeSet<Shape3D> setShapes3D;
+
+//    TreeSet<Shape> setShapes;
 
     public ShapeList(){
-        this.setShapes = new TreeSet<>();
+        this.setShapes2D = new TreeSet<>();
+        this.setShapes3D = new TreeSet<>();
     }
-
     public boolean add(Shape shape) throws Exception {
-        if (setShapes.contains(shape)){
+        if (setShapes2D.contains(shape) || setShapes3D.contains(shape)){
             throw new Exception();
         } else {
-            setShapes.add(shape);
+            if(shape instanceof Shape3D){
+                setShapes3D.add((Shape3D) shape);
+            }
+            else {
+                setShapes2D.add((Shape2D) shape);
+            }
+
             return true;
         }
     }
 
     public TreeSet<Shape2D> get2DShapes(){
-        TreeSet<Shape2D> new2DSet = new TreeSet<>();
-        for(Shape ref2: setShapes){
-            if(ref2 instanceof Shape2D){
-                new2DSet.add((Shape2D) ref2);
-            }
-        }
-        return new2DSet;
+        return setShapes2D;
     }
-
     public TreeSet<Shape3D> get3DShapes(){
-        TreeSet<Shape3D> new3DSet = new TreeSet<>();
-        for(Shape ref3: setShapes){
-            if(ref3 instanceof Shape3D){
-                new3DSet.add((Shape3D) ref3);
-            }
-        }
-        return new3DSet;
+        return setShapes3D;
     }
 
     public void printFormatted(){
@@ -50,62 +46,30 @@ public class ShapeList {
         System.out.println("| ID   | Name    | Color   | Dimensions          | Description       |");
         System.out.print(sb);
 
-        for (Shape element : setShapes) {
+        for (Shape3D element : setShapes3D) {
             System.out.printf("%5s%n", element);
             System.out.print(sb);
         }
-
-//        Iterator value = setShapes.iterator();
-
-//        StringBuilder sb2 = new StringBuilder(110);
-//        StringBuffer sb3 = new StringBuffer();
+        for (Shape2D element : setShapes2D) {
+            System.out.printf("%5s%n", element);
+            System.out.print(sb);
+        }
+//        TreeSet<Shape> setShapes = new TreeSet<>();
 //
-//        sb2.append(setShapes);
-//        System.out.println(sb2);
-
-//        String sb4 = "";
-
-//        System.out.println(sb4);
-
-//        StringBuffer[] line = new StringBuffer[];
-//        line = sb2.split(",");
-//
-//        for(int i=0; i<line.length; i++){
-//            System.out.println();
+//        for(Shape2D element : setShapes2D){
+//            setShapes.add(element);
 //        }
-
-//        for (Shape element : setShapes) {
-//            sb3.append(element + "\n");
-//            System.out.println(sb3);
+//        for (Shape3D element: setShapes3D){
+//            setShapes.add(element);
+//        }
+//        for (Shape element: setShapes){
+//            System.out.println(element);
 //            System.out.print(sb);
 //        }
 
-//        System.out.println(sb3);
-
-//        for (int i=0; i<sb2.length(); i++){
-//            System.out.println(sb2);
-//        }
-
-//        for (Shape element : setShapes) {
-////            String[] lineParts = toString(element).split("|");
-////            String line = toString(setShapes);
-////            sb2.append(element);
-//
-////            System.out.println(element);
-//            System.out.println(sb2);
-//            System.out.print(sb.toString());
-//        }
-
-//        String all = setShapes.toString();
-//        String[] splitted = all.split("|");
-////        String[] newthing = splitted.split("|");
-//        for (int i = 0 ; i <splitted.length; i++){
-//            System.out.print(toString(splitted[i].split("|")));
-//
-//        }
     }
 
     public int getSize(){
-        return setShapes.size();
+        return setShapes2D.size() + setShapes3D.size();
     }
 }

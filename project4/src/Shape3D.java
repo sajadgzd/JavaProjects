@@ -31,7 +31,7 @@ public abstract class Shape3D extends Shape2D {
 
     @Override
     public String toString(){
-        return "| " + getId() + " | " + getName() + "  | " + getColor() + "   | " + getDimensions() + "      | " + getDescription()
+        return  "| " + getId() + " | " + getName() + "  | " + getColor() + "   | " + getDimensions() + "      | " + getDescription()
                 + "       |";
     }
 
