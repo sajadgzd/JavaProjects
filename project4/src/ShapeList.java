@@ -52,7 +52,6 @@ public class ShapeList {
         System.out.println("| ID   | Name    | Color   | Dimensions          | Description       |");
         System.out.print(sb);
 
-
         for (Shape element: setShapes){
             System.out.println(element);
             System.out.print(sb);
