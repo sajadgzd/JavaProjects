@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="328.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="328.0">
+         <children>
+            <Label fx:id="lblAmount" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="85.0" text="Amount">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="txtAmount" alignment="TOP_CENTER" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="328.0">
+         <children>
+            <Label fx:id="lblAmount1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="85.0" text="15%">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <Slider prefHeight="16.0" prefWidth="166.0" value="15.0" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="328.0">
+         <children>
+            <Label fx:id="lblAmount2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="95.0" text="Tip">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="txtTip" alignment="TOP_CENTER" prefHeight="27.0" prefWidth="153.0" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="328.0">
+         <children>
+            <Label fx:id="lblAmount3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="85.0" text="Total">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="txtTotal" alignment="TOP_CENTER" />
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="328.0">
+         <children>
+            <Button fx:id="btn" mnemonicParsing="false" text="Button" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
+</VBox>
