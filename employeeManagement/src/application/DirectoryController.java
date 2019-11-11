@@ -1,24 +1,16 @@
 package application;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-//import java.awt.event.ActionEvent;
-import javafx.event.ActionEvent;
-
 public class DirectoryController {
 
     @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private Button btnSerialize;
-
-    @FXML
-    private TextField txtFldName;
+    private TextField txtFldCompany;
 
     @FXML
     private Label lblCurrRecord;
@@ -30,10 +22,28 @@ public class DirectoryController {
     private Button btnNavNext;
 
     @FXML
+    private Button btnNavDel;
+
+    @FXML
+    private Button btnNavPrev;
+
+    @FXML
+    private BorderPane borderPane;
+
+    @FXML
+    private Button btnSerialize;
+
+    @FXML
+    private TextField txtFldName;
+
+    @FXML
+    private Button btnNavAdd;
+
+    @FXML
     private Label lblFilename;
 
     @FXML
-    private Button btnNavDel;
+    private TextField txtFldExtension;
 
     @FXML
     private Button btnExit;
@@ -43,7 +53,16 @@ public class DirectoryController {
 
     }
 
-
+//    @FXML
+//    void buttonClicked(ActionEvent event) {
+//
+//    }
+//
+//    @FXML
+//    void buttonClicked(ActionEvent event) {
+//
+//    }
+//
 //    @FXML
 //    void buttonClicked(ActionEvent event) {
 //
