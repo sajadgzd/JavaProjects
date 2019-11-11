@@ -42,6 +42,9 @@ public class DirectoryController {
 
     }
 
+    public void buttonClicked(javafx.event.ActionEvent actionEvent) {
+    }
+
 //    @FXML
 //    void buttonClicked(ActionEvent event) {
 //
