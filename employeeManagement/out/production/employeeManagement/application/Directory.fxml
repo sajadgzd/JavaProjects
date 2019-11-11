@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="borderPane" prefHeight="350.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DirectoryController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="420.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DirectoryController">
 	<opaqueInsets>
 		<Insets />
 	</opaqueInsets>
