@@ -6,7 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 
 public class DirectoryController {
 
@@ -42,8 +43,6 @@ public class DirectoryController {
 
     }
 
-    public void buttonClicked(javafx.event.ActionEvent actionEvent) {
-    }
 
 //    @FXML
 //    void buttonClicked(ActionEvent event) {
