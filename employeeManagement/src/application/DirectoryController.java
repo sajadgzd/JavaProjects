@@ -1,5 +1,8 @@
 package application;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+
+import javafx.stage.FileChooser;
 
 public class DirectoryController {
 
@@ -59,7 +64,25 @@ public class DirectoryController {
 
     @FXML
     void buttonClicked(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Text File to Overwrite");
 
+
+            try(PrintWriter writer = new PrintWriter("FileText.fxml")){
+                writer.println("Contact Information List: ");
+                writer.println("");
+                writer.println("======================================================================================");
+                    writer.println("  First Name: " );
+                    writer.println("   Last Name: ");
+                    writer.println("Phone Number: ");
+                    writer.println("       Email: ");
+                    writer.println("       EMPLID: ");
+                    writer.println("======================================================================================");
+            } catch (IOException e) {
+                System.out.println(e);
+                e.printStackTrace();
+            }
+//            System.exit(0);
     }
 
 //    @FXML
