@@ -133,7 +133,7 @@ public class DirectoryController {
         //valid file loaded
 
         //set file name text
-        lblFilename.setText(selectedFile.getName());
+        lblFilename.setText("File: " + selectedFile.getName());
 
         //enable add button
         btnNavAdd.setDisable(false);
@@ -165,10 +165,7 @@ public class DirectoryController {
         Employee addedEmp = new Employee(empName, empDepartment, empExtension);
 
         //validate employee
-
-//        if(true) { // testing only
-            // -- uncomment below line after testing and comment above line --
-             if(!addedEmp.isValid()) {
+        if(!addedEmp.isValid()) {
             //display error dialog
             alert.setTitle("Invalid value");
             if(!addedEmp.isNameValid()) {

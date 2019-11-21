@@ -27,20 +27,20 @@ public class Employee {
     }
 
     public boolean isValid() {
-        return true;
-        // return isNameValid() && isDepartmentValid() && isExtensionValid();
+//        return true;
+        return isNameValid() && isDepartmentValid() && isExtensionValid();
     }
 
     public boolean isNameValid() {
-        return false;
+        return name.matches("([A-Z]+[a-z]{2,}\\s+){1,2}");
     }
 
     public boolean isDepartmentValid() {
-        return false;
+        return true;
     }
 
     public boolean isExtensionValid() {
-        return false;
+        return true;
     }
 
     /**
