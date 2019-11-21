@@ -38,7 +38,7 @@ public class Employee {
     public boolean isDepartmentValid() {
         return false;
     }
-
+    
     public boolean isExtensionValid() {
         return false;
     }
@@ -79,7 +79,7 @@ public class Employee {
 
         this.extension = extension;
     }
-
+    
     @Override
     public String toString() {
         return String.format("Employee >> ID: %d, Name: %s, Department: %s, Extension: %s", id, name, department, extension);

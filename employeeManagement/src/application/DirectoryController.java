@@ -1,30 +1,36 @@
+
 package application;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javax.xml.bind.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class DirectoryController {
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private TextField txtFldCompany;
+    private static EmployeeList appEmpList = null;
+    private static File selectedFile = null;
 
     @FXML
     private Label lblCurrRecord;
@@ -40,6 +46,9 @@ public class DirectoryController {
 
     @FXML
     private Button btnNavPrev;
+
+    @FXML
+    private TextField txtFldDepartment;
 
     @FXML
     private BorderPane borderPane;
@@ -63,73 +72,151 @@ public class DirectoryController {
     private Button btnExit;
 
     @FXML
-    void buttonClicked(ActionEvent event) {
+    private void buttonClicked(ActionEvent event) {
+        Button sourceBtn = (Button) event.getSource();
+
+        switch(sourceBtn.getId()) {
+            case "btnLoad":
+                handleBtnLoad();
+                break;
+            case "btnNavAdd":
+                handleBtnNavAdd();
+                break;
+            case "btnExit":
+                handleBtnExit();
+                break;
+        }
+    }
+
+    private void handleBtnLoad() {
+        Alert alert = new Alert(AlertType.ERROR);
+
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Text File to Overwrite");
+        selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if(selectedFile == null) {
+            alert.setTitle("Error Loading File");
+            alert.setHeaderText("No File Selected");
+            alert.setContentText("Please select a valid file an try again.");
+            System.out.println("Please select a valid file an try again.");
+            alert.showAndWait();
+            return;
+        }
+        System.out.println("selectedFile: " + selectedFile.getAbsolutePath());
+
+        if(!unmarshalFromFile()) {
+            alert.setTitle("Error Loading File");
+            alert.setHeaderText("Could not parse file");
+            alert.setContentText("Please select a valid file an try again.");
+            System.out.println("Please select a valid file an try again.");
+            alert.showAndWait();
+            return;
+        }
+
+        //DEBUG
+        System.out.println("selectedFile: " + selectedFile.getAbsolutePath());
+//        System.out.println(appEmpList.getLst());
+
+        //validate employees
+        if(!validateEmployees()) {
+            alert.setTitle("Error Loading File");
+            alert.setHeaderText("Invalid Employees");
+            alert.setContentText("Please select a file with valid employees and try again.");
+            System.out.println("Please select a file with valid employees and try again.");
+            alert.showAndWait();
+
+            //reset list of employees
+            appEmpList.setLst(null);
+            return;
+        }
+
+        //valid file loaded
+
+        //set file name text
+        lblFilename.setText(selectedFile.getName());
+
+        //enable add button
+        btnNavAdd.setDisable(false);
+    }
+
+    private boolean validateEmployees() {
+        return true;
+    }
+    private boolean unmarshalFromFile() {
+        try(BufferedReader input = Files.newBufferedReader(Paths.get(selectedFile.getAbsolutePath()))) {
+//            EmployeeList appEmpList = JAXB.unmarshal(input, EmployeeList.class);
+
+        } catch (IOException ioException) {
+            System.err.println("Error opening file");
+            return false;
+        }
+
+        //success
+        return true;
+    }
 
 
-            try(PrintWriter writer = new PrintWriter("FileText.fxml")){
-                writer.println("Contact Information List: ");
-                writer.println("");
-                writer.println("======================================================================================");
-                    writer.println("  First Name: " );
-                    writer.println("   Last Name: ");
-                    writer.println("Phone Number: ");
-                    writer.println("       Email: ");
-                    writer.println("       EMPLID: ");
-                    writer.println("======================================================================================");
-            } catch (IOException e) {
-                System.out.println(e);
-                e.printStackTrace();
+    private void handleBtnNavAdd() {
+        Alert alert = new Alert(AlertType.ERROR);
+
+        String empName = txtFldName.getText();
+        String empDepartment = txtFldDepartment.getText();
+        String empExtension = txtFldExtension.getText();
+        Employee addedEmp = new Employee(empName, empDepartment, empExtension);
+
+        //validate employee
+
+//        if(true) { // testing only
+            // -- uncomment below line after testing and comment above line --
+             if(!addedEmp.isValid()) {
+            //display error dialog
+            alert.setTitle("Invalid value");
+            if(!addedEmp.isNameValid()) {
+                alert.setHeaderText("Invalid Name \nNames can be 1 or 2 words.\n" +
+                        "1. Each word must start with an uppercase letter followed by at least 2 characters.\n" +
+                                "2. Numbers are not allowed.");
+                alert.showAndWait();
             }
-//            System.exit(0);
+            if(!addedEmp.isDepartmentValid()) {
+                alert.setHeaderText("Invalid Department. Department name\n" +
+                        "Departments can be 1 or 2 words.\n" +
+                        "2. Each word must start with an uppercase letter or can just be a single uppercase letter.\n" +
+                        "3. Numbers are allowed.");
+                alert.showAndWait();
+            }
+            if(!addedEmp.isExtensionValid()) {
+                alert.setHeaderText("Invalid Extension.\n"+
+                        "Extensions can only start with 1,2, or 3 numbers followed by a - followed 1 or 2 numbers." );
+                alert.showAndWait();
+            }
+
+            //reset list of employees
+            appEmpList.setLst(null);
+            return;
+        }
     }
 
-//    @FXML
-//    void buttonClicked(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void buttonClicked(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void buttonClicked(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void buttonClicked(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void buttonClicked(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void buttonClicked(ActionEvent event) {
-//
-//    }
+    private void handleBtnExit() {
 
-    @FXML
-    void initialize() {
-        assert txtFldCompany != null : "fx:id=\"txtFldCompany\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert lblCurrRecord != null : "fx:id=\"lblCurrRecord\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert btnLoad != null : "fx:id=\"btnLoad\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert btnNavNext != null : "fx:id=\"btnNavNext\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert btnNavDel != null : "fx:id=\"btnNavDel\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert btnNavPrev != null : "fx:id=\"btnNavPrev\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert borderPane != null : "fx:id=\"borderPane\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert btnSerialize != null : "fx:id=\"btnSerialize\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert txtFldName != null : "fx:id=\"txtFldName\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert btnNavAdd != null : "fx:id=\"btnNavAdd\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert lblFilename != null : "fx:id=\"lblFilename\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert txtFldExtension != null : "fx:id=\"txtFldExtension\" was not injected: check your FXML file 'Directory.fxml'.";
-        assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'Directory.fxml'.";
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Exit");
+        alert.setHeaderText("Are you sure you want to exit?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            System.out.println("Exit");
+            Platform.exit();
+            System.exit(0);
+        } else {
+            System.out.println("CANCEL");
+        }
+
 
     }
+
+
+
+
+
+
 }

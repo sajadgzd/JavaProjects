@@ -30,14 +30,14 @@
 						<RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold -fx-stroke: red" text="Company:" textAlignment="CENTER" GridPane.rowIndex="1">
+						<Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Company" textAlignment="CENTER" GridPane.rowIndex="1">
 							<font>
-								<Font name="Arial Black" size="12.0" />
+								<Font name="System Bold" size="14.0" />
 							</font>
 						</Label>
 						<Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="94.0" text="Extension:" textAlignment="RIGHT" GridPane.rowIndex="2">
 							<font>
-								<Font name="Arial Black" size="12.0" />
+								<Font name="System Bold" size="14.0" />
 							</font>
 						</Label>
 						<TextField fx:id="txtFldName" disable="true" GridPane.columnIndex="1">
@@ -95,7 +95,7 @@
 						</HBox>
                   <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name:" textAlignment="CENTER">
                      <font>
-                        <Font name="Arial Black" size="12.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <TextField fx:id="txtFldDepartment" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
