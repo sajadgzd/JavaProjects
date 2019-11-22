@@ -26,21 +26,27 @@ public class Employee {
         this.extension = extension;
     }
 
+    public Employee(long id, String name, String department, String extension) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.extension = extension;
+    }
+
     public boolean isValid() {
-//        return true;
         return isNameValid() && isDepartmentValid() && isExtensionValid();
     }
 
     public boolean isNameValid() {
-        return name.matches("([A-Z]+[a-z]{2,}\\s+){1,2}");
+        return this.name.matches("(^[A-Z][a-zA-Z]{2,}$)|(^[A-Z][a-zA-Z]{2,}\\s[A-Z][a-zA-Z]{2,}$)");
     }
 
     public boolean isDepartmentValid() {
-        return true;
+        return this.department.matches("(^[A-Z][a-zA-Z0-9]*$)|(^[A-Z][a-zA-Z0-9]*\\s[A-Z][a-zA-Z0-9]*$)");
     }
 
     public boolean isExtensionValid() {
-        return true;
+        return this.extension.matches("^[0-9]{1,3}-[0-9]{1,2}$");
     }
 
     /**

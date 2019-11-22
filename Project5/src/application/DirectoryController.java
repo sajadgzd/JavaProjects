@@ -106,7 +106,7 @@ public class DirectoryController {
         String empDepartment = txtFldDepartment.getText();
         String empExtension = txtFldExtension.getText();
 
-        //create new copy of current employee with upated values to validate
+        //create new copy of current employee with updated values to validate
         Employee updatedEmp = new Employee(appEmpList.getLst().get(appEmpListIdx).getId(), empName, empDepartment, empExtension);
 
         if(!updatedEmp.isValid()) {
