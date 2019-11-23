@@ -32,16 +32,21 @@ public class Employee {
         return isNameValid() && isDepartmentValid() && isExtensionValid();
     }
 
+    // Valid names consist of one or two words.
+    // Each word must start with an uppercase letter followed by at least two characters. Numbers are not allowed.
     public boolean isNameValid() {
-        return this.name.matches("(^[A-Z][a-zA-Z]{2,}$)|(^[A-Z][a-zA-Z]{2,}\\s[A-Z][a-zA-Z]{2,}$)");
+        return this.name.matches("([A-Z][a-zA-Z]{2,})|([A-Z][a-zA-Z]{2,}\\s[A-Z][a-zA-Z]{2,})");
     }
 
+    // Valid department names consist of one or two words.
+    // Each word must start with an uppercase letter. A word can be a single uppercase letter. Numbers are allowed
     public boolean isDepartmentValid() {
-        return this.department.matches("(^[A-Z][a-zA-Z0-9]*$)|(^[A-Z][a-zA-Z0-9]*\\s[A-Z][a-zA-Z0-9]*$)");
+        return this.department.matches("([A-Z][a-zA-Z0-9]*)|([A-Z][a-zA-Z0-9]*\\s[A-Z][a-zA-Z0-9]*)");
     }
 
+    // Valid extensions start with 1, 2, or 3 numbers followed by a dash " 􏰃 " followed by 1 or 2 numbers
     public boolean isExtensionValid() {
-        return this.extension.matches("^[0-9]{1,3}-[0-9]{1,2}$");
+        return this.extension.matches("[0-9]{1,3}-[0-9]{1,2}");
     }
 
     /**
