@@ -1,16 +1,11 @@
 package application;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "employee")
-@XmlAccessorType (XmlAccessType.FIELD)
 public class Employee {
     //static
-    private static long idCounter = 0l;
+    private static int idCounter = 0;
 
-    private final long id;
+    private final int id;
     private String name;
     private String department;
     private String extension;
@@ -26,7 +21,7 @@ public class Employee {
         this.extension = extension;
     }
 
-    public Employee(long id, String name, String department, String extension) {
+    public Employee(int id, String name, String department, String extension) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -52,7 +47,7 @@ public class Employee {
     /**
      * @return the id
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
