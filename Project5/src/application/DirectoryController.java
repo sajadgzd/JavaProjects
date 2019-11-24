@@ -107,27 +107,13 @@ public class DirectoryController {
 //        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.setTitle("Serialize");
 
-        //update/save current record
-        String empName = txtFldName.getText();
-        String empDepartment = txtFldDepartment.getText();
-        String empExtension = txtFldExtension.getText();
-
-        //create new copy of current employee with updated values to validate
-        Employee updatedEmp = new Employee(appEmpList.getLst().get(appEmpListIdx).getId(), empName, empDepartment, empExtension);
-
-        if(!updatedEmp.isValid()) {
-            // display error dialog
-            showAlerts(updatedEmp);
-            return;
-        }
+        // save and update current employee
+        if(!saveUpdateEmployee()) return;
 
         //get output file
         FileChooser fileChooser = new FileChooser();
         selectedFile = fileChooser.showOpenDialog(new Stage());
         if(selectedFile == null) { return; }
-
-        // update/save current employee
-        saveEmployee(appEmpListIdx, updatedEmp);
 
         if(marshalToFile()) {
             alert.setAlertType(AlertType.INFORMATION);
@@ -165,6 +151,8 @@ public class DirectoryController {
             btnNavPrev.setDisable(true);
             return;
         }
+        // save and update the current record
+        if(!saveUpdateEmployee()) return;
 
         // go to prev record
         appEmpListIdx--;
@@ -181,6 +169,10 @@ public class DirectoryController {
     }
 
     private void handleBtnNavNext() {
+
+        // save and update the current record
+        if(!saveUpdateEmployee()) return;
+
         //go to next record
         appEmpListIdx++;
         updateUI(appEmpList, appEmpListIdx);
@@ -193,6 +185,7 @@ public class DirectoryController {
 
         //enable prev button
         btnNavPrev.setDisable(false);
+
     }
 
     private Employee handleBtnNavDel() {
@@ -250,22 +243,9 @@ public class DirectoryController {
     private void handleBtnNavAdd() {
         //validate & save current employee unless list is empty
         if(appEmpList.getLst().size() > 0) {
-            String empName = txtFldName.getText();
-            String empDepartment = txtFldDepartment.getText();
-            String empExtension = txtFldExtension.getText();
 
-            //create new copy of current employee with updated values to validate
-            Employee updatedEmp = new Employee(appEmpList.getLst().get(appEmpListIdx).getId(), empName, empDepartment, empExtension);
-
-
-            if(!updatedEmp.isValid()) {
-                // display error dialog
-                showAlerts(updatedEmp);
-                return;
-            }
-
-            // update/save current employee
-            saveEmployee(appEmpListIdx, updatedEmp);
+            // save and update current employee
+            if(!saveUpdateEmployee()) return;
 
             // enable prev button
             btnNavPrev.setDisable(false);
@@ -449,10 +429,26 @@ public class DirectoryController {
         txtFldExtension.setText(appEmpList.getLst().get(appEmpListIdx).getExtension());
     }
 
-    private void saveEmployee(int appEmpListIdx, Employee updatedEmp) {
+    private boolean saveUpdateEmployee(){
+        String empName = txtFldName.getText();
+        String empDepartment = txtFldDepartment.getText();
+        String empExtension = txtFldExtension.getText();
+
+        //create new copy of current employee with updated values to validate
+        Employee updatedEmp = new Employee(appEmpList.getLst().get(appEmpListIdx).getId(), empName, empDepartment, empExtension);
+
+
+        if(!updatedEmp.isValid()) {
+            // display error dialog
+            showAlerts(updatedEmp);
+            return false;
+        }
+
         // update/save current employee
         appEmpList.getLst().get(appEmpListIdx).setName(updatedEmp.getName());
         appEmpList.getLst().get(appEmpListIdx).setDepartment(updatedEmp.getDepartment());
         appEmpList.getLst().get(appEmpListIdx).setExtension(updatedEmp.getExtension());
+
+        return true;
     }
 }

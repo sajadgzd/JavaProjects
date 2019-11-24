@@ -15,4 +15,19 @@
         <extension>99-99</extension>
         <name>Hasan</name>
     </employee>
+    <employee>
+        <department>Prev</department>
+        <extension>11-11</extension>
+        <name>Prev</name>
+    </employee>
+    <employee>
+        <department>Next</department>
+        <extension>22-22</extension>
+        <name>Next</name>
+    </employee>
+    <employee>
+        <department>Last</department>
+        <extension>11-11</extension>
+        <name>Last</name>
+    </employee>
 </employees>
