@@ -129,7 +129,7 @@
 		</BorderPane>
    </bottom>
    <top>
-		<Button fx:id="btnExit" alignment="CENTER" mnemonicParsing="false" onAction="#buttonClicked" prefWidth="120.0" style="-fx-background-color: RED;" text="Save and Exit" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="TOP_RIGHT">
+		<Button fx:id="btnExit" alignment="CENTER" mnemonicParsing="false" onAction="#buttonClicked" prefWidth="120.0" style="-fx-background-color: RED;" text="Exit" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="TOP_RIGHT">
 			<font>
 				<Font name="System Bold" size="12.0" />
 			</font>
