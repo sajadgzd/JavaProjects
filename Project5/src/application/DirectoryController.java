@@ -178,19 +178,19 @@ public class DirectoryController {
             return;
         }
 
-        //exit successfully
+        // exit successfully
         System.exit(0);
     }
 
     private void handleBtnNavPrev() {
-        //ensure there's a previous record
+        // ensure there's a previous record
         if(appEmpListIdx <= 0) {
             //no prev record
             btnNavPrev.setDisable(true);
             return;
         }
 
-        //go to prev record
+        // go to prev record
         appEmpListIdx--;
         txtFldName.setText(appEmpList.getLst().get(appEmpListIdx).getName());
         txtFldDepartment.setText(appEmpList.getLst().get(appEmpListIdx).getDepartment());
@@ -260,7 +260,7 @@ public class DirectoryController {
             appEmpListIdx--;
         }
 
-        //update UI inputs to prev record as long as
+        //update UI inputs to prev record
         txtFldName.setText(appEmpList.getLst().get(appEmpListIdx).getName());
         txtFldDepartment.setText(appEmpList.getLst().get(appEmpListIdx).getDepartment());
         txtFldExtension.setText(appEmpList.getLst().get(appEmpListIdx).getExtension());
@@ -290,8 +290,8 @@ public class DirectoryController {
             Employee updatedEmp = new Employee(appEmpList.getLst().get(appEmpListIdx).getId(), empName, empDepartment, empExtension);
 
             if(!updatedEmp.isValid()) {
-                //display error dialog
-                alert.setTitle("Invalid Value");
+                // display error dialog
+                // alert.setTitle("Invalid Value");
                 if(!updatedEmp.isNameValid()) {
                     alert.setHeaderText("Invalid Name \nNames can be 1 or 2 words.\n" +
                         "1. Each word must start with an uppercase letter followed by at least 2 characters.\n" +
@@ -314,35 +314,35 @@ public class DirectoryController {
                 return;
             }
 
-            //update/save current employee
+            // update/save current employee
             appEmpList.getLst().get(appEmpListIdx).setName(updatedEmp.getName());
             appEmpList.getLst().get(appEmpListIdx).setDepartment(updatedEmp.getDepartment());
             appEmpList.getLst().get(appEmpListIdx).setExtension(updatedEmp.getExtension());
 
-            //enable prev button
+            // enable prev button
             btnNavPrev.setDisable(false);
         }
 
-        //clear inputs for new entry
+        // clear inputs for new entry
         txtFldName.setText("");
         txtFldDepartment.setText("");
         txtFldExtension.setText("");
 
-        //enable inputs
+        // enable inputs
         txtFldName.setDisable(false);
         txtFldDepartment.setDisable(false);
         txtFldExtension.setDisable(false);
 
-        //add new entry
+        // add new entry
         appEmpList.createNew();
 
-        //enable del button
+        // enable del button
         btnNavDel.setDisable(false);
 
-        //disable next button
+        // disable next button
         btnNavNext.setDisable(true);
 
-        //update current record label
+        // update current record label
         appEmpListIdx = appEmpList.getLst().size() - 1;
         lblCurrRecord.setText(String.format("%d of %d", appEmpListIdx + 1, appEmpList.getLst().size()));
     }
@@ -423,7 +423,10 @@ public class DirectoryController {
     }
 
     private boolean validateEmployees() {
-        return !appEmpList.getLst().stream().filter(emp -> { return !emp.isValid(); }).findAny().isPresent();
+        for(Employee emp : appEmpList.getLst()){
+            if(!emp.isValid()) return false;
+        }
+        return true;
     }
 
     private boolean marshalToFile() {

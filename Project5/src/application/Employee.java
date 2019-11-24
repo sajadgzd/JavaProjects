@@ -49,9 +49,6 @@ public class Employee {
         return this.extension.matches("[0-9]{1,3}-[0-9]{1,2}");
     }
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
