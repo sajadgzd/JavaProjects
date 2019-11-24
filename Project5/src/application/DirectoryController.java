@@ -1,8 +1,14 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -370,7 +376,7 @@ public class DirectoryController {
         System.out.println(appEmpList.getLst());
 
         //validate employees
-        if(!validateEmployees()) {
+        if(!validateEmployees() && appEmpList.getLst().get(0).getId() != 0 ) {
             alert.setTitle("Error Loading File");
             alert.setHeaderText("Invalid Employees");
             alert.setContentText("Please select a file with valid employees and try again.");
@@ -421,22 +427,40 @@ public class DirectoryController {
     }
 
     private boolean marshalToFile() {
-        try{
-            JAXB.marshal(appEmpList, selectedFile);
-        } catch(DataBindingException ex) {
-            ex.printStackTrace();
+        try(BufferedWriter output = Files.newBufferedWriter(Paths.get(selectedFile.toURI()))){
+            JAXB.marshal(appEmpList, output);
+            //success
+            return true;
+        } catch(IOException ex) {
+            System.err.println("Error writing to file!");
             return false;
         }
-
-        //success
-        return true;
     }
 
     private boolean unmarshalFromFile() {
-        appEmpList = JAXB.unmarshal(selectedFile, EmployeeList.class);
 
-        //success
-        return true;
+        // For the case of an empty file for the first time being read. id = 0.
+        if(selectedFile.length() == 0){
+            Employee emptyEmployee = new Employee(0,"","","");
+            List<Employee> emptyList = new ArrayList<>();
+            emptyList.add(emptyEmployee);
+            appEmpList = new EmployeeList();
+            appEmpList.setLst(emptyList);
+            return true;
+        }
+
+        // not empty files:
+        try(BufferedReader input = Files.newBufferedReader(Paths.get(selectedFile.toURI()))){
+            appEmpList = JAXB.unmarshal(input, EmployeeList.class);
+            return true;
+        }
+        catch (IOException ioException){
+            System.err.println("Error loading file!!!");
+            return false;
+        }
+
+
+
     }
 
     // location and resources will be automatically injected by the FXML loader
