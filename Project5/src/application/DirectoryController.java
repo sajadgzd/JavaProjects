@@ -290,6 +290,7 @@ public class DirectoryController {
             return;
         }
 
+        // marshal the file, and if it returns false
         if(!unmarshalFromFile()) {
             alert.setTitle("Error when reading the File");
             alert.setHeaderText("Could not parse file");
@@ -335,8 +336,14 @@ public class DirectoryController {
         //update appEmpListIdx
         appEmpListIdx = 0;
 
-        //update current record label
-        lblCurrRecord.setText(String.format("%d of %d", appEmpListIdx+1, appEmpList.getLst().size()));
+        // update current record label
+        // for the first time, when the file being read is an empty file, show 0 of 0, else; the number of records
+        if(appEmpList.getLst().get(0).getId() == 0){
+            lblCurrRecord.setText("0 of 0");
+        } else {
+            lblCurrRecord.setText(String.format("%d of %d", appEmpListIdx+1, appEmpList.getLst().size()));
+        }
+
 
         //disable del button if size < 1, else enable
         btnNavDel.setDisable(appEmpList.getLst().size() < 1);
