@@ -104,7 +104,7 @@ public class DirectoryController {
 
     private void handleBtnSerialize() {
         Alert alert = new Alert(AlertType.ERROR);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+//        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.setTitle("Serialize");
 
         //update/save current record
@@ -116,31 +116,8 @@ public class DirectoryController {
         Employee updatedEmp = new Employee(appEmpList.getLst().get(appEmpListIdx).getId(), empName, empDepartment, empExtension);
 
         if(!updatedEmp.isValid()) {
-            //display error dialog(s)
-            System.out.println("handleBtnSerialize() >> Current record is invalid");
-            alert.setHeaderText("Current record is invalid");
-            alert.showAndWait();
-
-            alert.setTitle("Invalid Employee Value");
-            if(!updatedEmp.isNameValid()) {
-                alert.setHeaderText("Invalid Name \nNames can be 1 or 2 words.\n" +
-                        "1. Each word must start with an uppercase letter followed by at least 2 characters.\n" +
-                        "2. Numbers are not allowed.");
-                alert.showAndWait();
-            }
-            if(!updatedEmp.isDepartmentValid()) {
-                alert.setHeaderText("Invalid Department. Department name\n" +
-                        "Departments can be 1 or 2 words.\n" +
-                        "2. Each word must start with an uppercase letter or can just be a single uppercase letter.\n" +
-                        "3. Numbers are allowed.");
-                alert.showAndWait();
-            }
-            if(!updatedEmp.isExtensionValid()) {
-                alert.setHeaderText("Invalid Extension.\n"+
-                        "Extensions can only start with 1,2, or 3 numbers followed by a - followed 1 or 2 numbers." );
-                alert.showAndWait();
-            }
-
+            // display error dialog
+            showAlerts(updatedEmp);
             return;
         }
 
@@ -149,9 +126,8 @@ public class DirectoryController {
         selectedFile = fileChooser.showOpenDialog(new Stage());
         if(selectedFile == null) { return; }
 
-        appEmpList.getLst().get(appEmpListIdx).setName(updatedEmp.getName());
-        appEmpList.getLst().get(appEmpListIdx).setDepartment(updatedEmp.getDepartment());
-        appEmpList.getLst().get(appEmpListIdx).setExtension(updatedEmp.getExtension());
+        // update/save current employee
+        saveEmployee(appEmpListIdx, updatedEmp);
 
         if(marshalToFile()) {
             alert.setAlertType(AlertType.INFORMATION);
@@ -192,9 +168,7 @@ public class DirectoryController {
 
         // go to prev record
         appEmpListIdx--;
-        txtFldName.setText(appEmpList.getLst().get(appEmpListIdx).getName());
-        txtFldDepartment.setText(appEmpList.getLst().get(appEmpListIdx).getDepartment());
-        txtFldExtension.setText(appEmpList.getLst().get(appEmpListIdx).getExtension());
+        updateUI(appEmpList, appEmpListIdx);
 
         //update current record label
         lblCurrRecord.setText(String.format("%d of %d", appEmpListIdx + 1, appEmpList.getLst().size()));
@@ -209,9 +183,7 @@ public class DirectoryController {
     private void handleBtnNavNext() {
         //go to next record
         appEmpListIdx++;
-        txtFldName.setText(appEmpList.getLst().get(appEmpListIdx).getName());
-        txtFldDepartment.setText(appEmpList.getLst().get(appEmpListIdx).getDepartment());
-        txtFldExtension.setText(appEmpList.getLst().get(appEmpListIdx).getExtension());
+        updateUI(appEmpList, appEmpListIdx);
 
         //update current record label
         lblCurrRecord.setText(String.format("%d of %d", appEmpListIdx + 1, appEmpList.getLst().size()));
@@ -261,9 +233,7 @@ public class DirectoryController {
         }
 
         //update UI inputs to prev record
-        txtFldName.setText(appEmpList.getLst().get(appEmpListIdx).getName());
-        txtFldDepartment.setText(appEmpList.getLst().get(appEmpListIdx).getDepartment());
-        txtFldExtension.setText(appEmpList.getLst().get(appEmpListIdx).getExtension());
+        updateUI(appEmpList, appEmpListIdx);
 
         //update current record label
         lblCurrRecord.setText(String.format("%d of %d", appEmpListIdx + 1, appEmpList.getLst().size()));
@@ -278,8 +248,6 @@ public class DirectoryController {
     }
 
     private void handleBtnNavAdd() {
-        Alert alert = new Alert(AlertType.ERROR);
-
         //validate & save current employee unless list is empty
         if(appEmpList.getLst().size() > 0) {
             String empName = txtFldName.getText();
@@ -289,35 +257,15 @@ public class DirectoryController {
             //create new copy of current employee with updated values to validate
             Employee updatedEmp = new Employee(appEmpList.getLst().get(appEmpListIdx).getId(), empName, empDepartment, empExtension);
 
+
             if(!updatedEmp.isValid()) {
                 // display error dialog
-                // alert.setTitle("Invalid Value");
-                if(!updatedEmp.isNameValid()) {
-                    alert.setHeaderText("Invalid Name \nNames can be 1 or 2 words.\n" +
-                        "1. Each word must start with an uppercase letter followed by at least 2 characters.\n" +
-                        "2. Numbers are not allowed.");
-                    alert.showAndWait();
-                }
-                if(!updatedEmp.isDepartmentValid()) {
-                    alert.setHeaderText("Invalid Department. Department name\n" +
-                        "Departments can be 1 or 2 words.\n" +
-                        "2. Each word must start with an uppercase letter or can just be a single uppercase letter.\n" +
-                        "3. Numbers are allowed.");
-                    alert.showAndWait();
-                }
-                if(!updatedEmp.isExtensionValid()) {
-                    alert.setHeaderText("Invalid Extension.\n"+
-                        "Extensions can only start with 1,2, or 3 numbers followed by a - followed 1 or 2 numbers." );
-                    alert.showAndWait();
-                }
-
+                showAlerts(updatedEmp);
                 return;
             }
 
             // update/save current employee
-            appEmpList.getLst().get(appEmpListIdx).setName(updatedEmp.getName());
-            appEmpList.getLst().get(appEmpListIdx).setDepartment(updatedEmp.getDepartment());
-            appEmpList.getLst().get(appEmpListIdx).setExtension(updatedEmp.getExtension());
+            saveEmployee(appEmpListIdx, updatedEmp);
 
             // enable prev button
             btnNavPrev.setDisable(false);
@@ -363,7 +311,7 @@ public class DirectoryController {
         }
 
         if(!unmarshalFromFile()) {
-            alert.setTitle("Error Loading File");
+            alert.setTitle("Error when reading the File");
             alert.setHeaderText("Could not parse file");
             alert.setContentText("Please select a valid file and try again.");
             System.out.println("Please select a valid file and try again.");
@@ -371,19 +319,19 @@ public class DirectoryController {
             return;
         }
 
-        //DEBUG
+        // DEBUG helper
         System.out.println("selectedFile: " + selectedFile.getAbsolutePath());
         System.out.println(appEmpList.getLst());
 
-        //validate employees
+        // validate employees
         if(!validateEmployees() && appEmpList.getLst().get(0).getId() != 0 ) {
-            alert.setTitle("Error Loading File");
+            alert.setTitle("Error Validating File");
             alert.setHeaderText("Invalid Employees");
-            alert.setContentText("Please select a file with valid employees and try again.");
-            System.out.println("Please select a file with valid employees and try again.");
+            alert.setContentText("Please select a file with 'valid employees' and try again.");
+            System.out.println("Please select a file with 'valid employees' and try again.");
             alert.showAndWait();
 
-            //reset list of employees
+            // reset list of employees
             appEmpList.setLst(new ArrayList<>());
             return;
         }
@@ -462,8 +410,6 @@ public class DirectoryController {
             return false;
         }
 
-
-
     }
 
     // location and resources will be automatically injected by the FXML loader
@@ -472,4 +418,41 @@ public class DirectoryController {
 
     @FXML
     private ResourceBundle resources;
+
+    private void showAlerts(Employee updatedEmp){
+        Alert alert = new Alert(AlertType.ERROR);
+        // display error dialog
+        alert.setTitle("Invalid Value");
+        if(!updatedEmp.isNameValid()) {
+            alert.setHeaderText("Invalid Name \nNames can be 1 or 2 words.\n" +
+                    "1. Each word must start with an uppercase letter followed by at least 2 characters.\n" +
+                    "2. Numbers are not allowed.");
+            alert.showAndWait();
+        }
+        if(!updatedEmp.isDepartmentValid()) {
+            alert.setHeaderText("Invalid Department. Department name\n" +
+                    "Departments can be 1 or 2 words.\n" +
+                    "2. Each word must start with an uppercase letter or can just be a single uppercase letter.\n" +
+                    "3. Numbers are allowed.");
+            alert.showAndWait();
+        }
+        if(!updatedEmp.isExtensionValid()) {
+            alert.setHeaderText("Invalid Extension.\n"+
+                    "Extensions can only start with 1,2, or 3 numbers followed by a - followed 1 or 2 numbers." );
+            alert.showAndWait();
+        }
+    }
+
+    private void updateUI(EmployeeList appEmpList, int appEmpListIdx){
+        txtFldName.setText(appEmpList.getLst().get(appEmpListIdx).getName());
+        txtFldDepartment.setText(appEmpList.getLst().get(appEmpListIdx).getDepartment());
+        txtFldExtension.setText(appEmpList.getLst().get(appEmpListIdx).getExtension());
+    }
+
+    private void saveEmployee(int appEmpListIdx, Employee updatedEmp) {
+        // update/save current employee
+        appEmpList.getLst().get(appEmpListIdx).setName(updatedEmp.getName());
+        appEmpList.getLst().get(appEmpListIdx).setDepartment(updatedEmp.getDepartment());
+        appEmpList.getLst().get(appEmpListIdx).setExtension(updatedEmp.getExtension());
+    }
 }
