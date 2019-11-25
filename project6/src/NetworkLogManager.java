@@ -137,13 +137,17 @@ public class NetworkLogManager {
          * Do not use for
          */
         List<LogEntry> retList = new ArrayList<LogEntry>();
-        for (LogEntry logEnt : listLogEntries) {
+//        for (LogEntry logEnt : listLogEntries) {
+//
+//            String logEntryValue = getSearchValue(logEnt, field);
+//
+//            if (logEntryValue.equals(searchVal))
+//                retList.add(logEnt);
+//        }
+        //
+        retList = listLogEntries.stream().filter(x -> getSearchValue(x, field).equals(searchVal))
+                .collect(Collectors.toList());
 
-            String logEntryValue = getSearchValue(logEnt, field);
-
-            if (logEntryValue.equals(searchVal))
-                retList.add(logEnt);
-        }
 
         return retList;
     }
