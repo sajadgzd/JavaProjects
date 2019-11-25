@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class NetworkLogManager {
 
@@ -115,13 +117,32 @@ public class NetworkLogManager {
             Date from = formatter.parse(fromDate);
             Date to = formatter.parse(toDate);
 
-            for (LogEntry logEnt : listLogEntries) {
+//            for (LogEntry logEnt : listLogEntries) {
+//
+//                Date timestamp = formatter.parse(logEnt.getTimestamp());
+//
+//                if (timestamp.compareTo(from) >= 0 && timestamp.compareTo(to) <= 0)
+//                    retList.add(logEnt);
+//            }
+            //
+//            Date timestamp = formatter.parse(logEnt.getTimestamp());
 
-                Date timestamp = formatter.parse(logEnt.getTimestamp());
+//            List<LogEntry> testLst = new ArrayList<LogEntry>();
 
-                if (timestamp.compareTo(from) >= 0 && timestamp.compareTo(to) <= 0)
-                    retList.add(logEnt);
-            }
+
+            retList = listLogEntries.stream()
+                    .filter(x -> {
+                        try {
+                            return formatter.parse(x.getTimestamp()).compareTo(from) >= 0
+                                    && formatter.parse(x.getTimestamp()).compareTo(to) <= 0;
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            return Boolean.parseBoolean(null);
+                        }
+                    })
+                    .collect(Collectors.toList());
+
+
         }
         catch (ParseException pe) {
 
