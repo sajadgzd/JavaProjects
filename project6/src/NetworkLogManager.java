@@ -111,12 +111,11 @@ public class NetworkLogManager {
          * Convert to code using Streams.
          * Do not use for
          */
-        List<LogEntry> retList = new ArrayList<LogEntry>();
 
         Date from = formatter.parse(fromDate);
         Date to = formatter.parse(toDate);
 
-        retList = listLogEntries.stream()
+        List<LogEntry> retList = listLogEntries.stream()
                 .filter(x -> {
                     try {
                         return formatter.parse(x.getTimestamp()).compareTo(from) >= 0
@@ -136,16 +135,8 @@ public class NetworkLogManager {
          * Convert to code using Streams.
          * Do not use for
          */
-        List<LogEntry> retList = new ArrayList<LogEntry>();
-//        for (LogEntry logEnt : listLogEntries) {
-//
-//            String logEntryValue = getSearchValue(logEnt, field);
-//
-//            if (logEntryValue.equals(searchVal))
-//                retList.add(logEnt);
-//        }
-        //
-        retList = listLogEntries.stream().filter(x -> getSearchValue(x, field).equals(searchVal))
+
+        List<LogEntry> retList = listLogEntries.stream().filter(x -> getSearchValue(x, field).equals(searchVal))
                 .collect(Collectors.toList());
 
 
