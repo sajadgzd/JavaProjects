@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class A6Driver {
         separator.append(IntStream.range(0, 110).mapToObj(i -> "-").collect(Collectors.joining("")));
     }
 
-    public static void main(String[] args) throws FileNotFoundException, ParseException {
+    public static void main(String[] args) throws FileNotFoundException, ParseException, IOException {
 
         NetworkLogManager networkLogManager = new NetworkLogManager();
 

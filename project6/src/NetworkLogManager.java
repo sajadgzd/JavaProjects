@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,43 +27,56 @@ public class NetworkLogManager {
         this.listLogEntries = new ArrayList<LogEntry>();
     }
 
-    public boolean loadFile(String fileName) throws FileNotFoundException {
+    public boolean loadFile(String fileName) throws IOException {
 
         /*
          * Convert to code using Streams.
          * Do not use Scanner or while
          */
-        Scanner scanner = null;
+//        Scanner scanner = null;
 
         try {
-            scanner = new Scanner(new File(fileName));
+//            scanner = new Scanner(new File(fileName));
+//
+//            String line = "";
+//
+//            while (scanner.hasNext()) {
+//
+//                line = scanner.nextLine();
+//
+//                String arr[] = line.split(",");
+//
+//                try {
+//
+//                    if (!listLogEntries.add(new LogEntry(arr[0].trim(), arr[1].trim(), arr[2].trim(), arr[3].trim(), arr[4].trim(), arr[5].trim(), arr[6].trim())))
+//                        System.out.printf("Skipping line: %s%n", line);
+//                }
+//                catch (IllegalArgumentException ex) {
+//                    System.out.printf("Skipping line: %s%n", line);
+//                }
+//            }
 
-            String line = "";
-
-            while (scanner.hasNext()) {
-
-                line = scanner.nextLine();
-
-                String arr[] = line.split(",");
-
-                try {
-
-                    if (!listLogEntries.add(new LogEntry(arr[0].trim(), arr[1].trim(), arr[2].trim(), arr[3].trim(), arr[4].trim(), arr[5].trim(), arr[6].trim())))
-                        System.out.printf("Skipping line: %s%n", line);
-                }
-                catch (IllegalArgumentException ex) {
-                    System.out.printf("Skipping line: %s%n", line);
-                }
-            }
+            Files.lines(Paths.get(fileName))
+//                    .map(line -> line.split(","))
+                    .forEach(line -> {
+                        String[] lineArr = line.split(",");
+                        try {
+                            listLogEntries.add(new LogEntry(lineArr[0].trim(), lineArr[1].trim(), lineArr[2].trim(),
+                                    lineArr[3].trim(), lineArr[4].trim(), lineArr[5].trim(), lineArr[6].trim()));
+                        }
+                        catch (IllegalArgumentException ex){
+                            System.out.printf("Skipping line: %s%n", line);
+                        }
+                    });
         }
-        catch (FileNotFoundException fnfe) {
+        catch (IOException fnfe) {
 
             return false;
         }
-        finally {
-
-            scanner.close();
-        }
+//        finally {
+//
+//            scanner.close();
+//        }
 
         return true;
     }
