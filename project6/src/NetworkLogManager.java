@@ -113,41 +113,19 @@ public class NetworkLogManager {
          */
         List<LogEntry> retList = new ArrayList<LogEntry>();
 
-        try {
-            Date from = formatter.parse(fromDate);
-            Date to = formatter.parse(toDate);
+        Date from = formatter.parse(fromDate);
+        Date to = formatter.parse(toDate);
 
-//            for (LogEntry logEnt : listLogEntries) {
-//
-//                Date timestamp = formatter.parse(logEnt.getTimestamp());
-//
-//                if (timestamp.compareTo(from) >= 0 && timestamp.compareTo(to) <= 0)
-//                    retList.add(logEnt);
-//            }
-            //
-//            Date timestamp = formatter.parse(logEnt.getTimestamp());
-
-//            List<LogEntry> testLst = new ArrayList<LogEntry>();
-
-
-            retList = listLogEntries.stream()
-                    .filter(x -> {
-                        try {
-                            return formatter.parse(x.getTimestamp()).compareTo(from) >= 0
-                                    && formatter.parse(x.getTimestamp()).compareTo(to) <= 0;
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                            return Boolean.parseBoolean(null);
-                        }
-                    })
-                    .collect(Collectors.toList());
-
-
-        }
-        catch (ParseException pe) {
-
-            pe.printStackTrace();
-        }
+        retList = listLogEntries.stream()
+                .filter(x -> {
+                    try {
+                        return formatter.parse(x.getTimestamp()).compareTo(from) >= 0
+                                && formatter.parse(x.getTimestamp()).compareTo(to) <= 0;
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return Boolean.parseBoolean(null);
+                    }
+                }).collect(Collectors.toList());
 
         return retList;
     }
