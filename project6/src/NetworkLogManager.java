@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class NetworkLogManager {
@@ -27,37 +23,14 @@ public class NetworkLogManager {
         this.listLogEntries = new ArrayList<LogEntry>();
     }
 
-    public boolean loadFile(String fileName) throws IOException {
+    public boolean loadFile(String fileName) {
 
         /*
          * Convert to code using Streams.
          * Do not use Scanner or while
          */
-//        Scanner scanner = null;
-
         try {
-//            scanner = new Scanner(new File(fileName));
-//
-//            String line = "";
-//
-//            while (scanner.hasNext()) {
-//
-//                line = scanner.nextLine();
-//
-//                String arr[] = line.split(",");
-//
-//                try {
-//
-//                    if (!listLogEntries.add(new LogEntry(arr[0].trim(), arr[1].trim(), arr[2].trim(), arr[3].trim(), arr[4].trim(), arr[5].trim(), arr[6].trim())))
-//                        System.out.printf("Skipping line: %s%n", line);
-//                }
-//                catch (IllegalArgumentException ex) {
-//                    System.out.printf("Skipping line: %s%n", line);
-//                }
-//            }
-
             Files.lines(Paths.get(fileName))
-//                    .map(line -> line.split(","))
                     .forEach(line -> {
                         String[] lineArr = line.split(",");
                         try {
@@ -70,14 +43,8 @@ public class NetworkLogManager {
                     });
         }
         catch (IOException fnfe) {
-
             return false;
         }
-//        finally {
-//
-//            scanner.close();
-//        }
-
         return true;
     }
 
