@@ -99,13 +99,13 @@ public class NetworkLogManager {
         Date to = formatter.parse(toDate);
 
         List<LogEntry> retList = listLogEntries.stream()
-                .filter(x -> {
+                .filter(logEnt -> {
                     try {
-                        return formatter.parse(x.getTimestamp()).compareTo(from) >= 0
-                                && formatter.parse(x.getTimestamp()).compareTo(to) <= 0;
+                        return formatter.parse(logEnt.getTimestamp()).compareTo(from) >= 0
+                                && formatter.parse(logEnt.getTimestamp()).compareTo(to) <= 0;
                     } catch (ParseException e) {
                         e.printStackTrace();
-                        return Boolean.parseBoolean(null);
+                        return false;
                     }
                 }).collect(Collectors.toList());
 
@@ -119,9 +119,9 @@ public class NetworkLogManager {
          * Do not use for
          */
 
-        List<LogEntry> retList = listLogEntries.stream().filter(x -> getSearchValue(x, field).equals(searchVal))
+        List<LogEntry> retList = listLogEntries.stream()
+                .filter(logEnt -> getSearchValue(logEnt, field).equals(searchVal))
                 .collect(Collectors.toList());
-
 
         return retList;
     }
