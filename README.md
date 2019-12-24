@@ -1,1 +1,1 @@
-# Repo for my JavaProjects
+# Repo for my Java Projects
