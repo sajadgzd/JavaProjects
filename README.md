@@ -1,1 +1,1 @@
-# This Repo is for my Java Projects
+# This Repository is for my Java Projects
